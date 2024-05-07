@@ -4,14 +4,14 @@ on: push
 
 jobs:
   create-pr-on-push:
+    if: ${{ (contains(github.event.head_commit.message, 'BUG') || contains(github.event.head_commit.message, 'IMP'))  && github.event.pull_request.merged == false }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@1.0.0
-
-    - name: Create PR
+    - name: Create pull request
       uses: thomaseizinger/create-pull-request@master
       with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PAT_CREATE_PULL_REQUEST }}
         head: ${{ github.ref }}
         base: main
-        title: "AUTO PR"
+        title: ${{ github.event.head_commit.message }}
