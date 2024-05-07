@@ -1,6 +1,9 @@
 name: auto-pr
 
-on: push
+on: 
+  push { 
+    branches: ["token"]
+  }
 
 jobs:
   create-pr-on-push:
