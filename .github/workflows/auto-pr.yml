@@ -1,0 +1,17 @@
+name: auto-pr
+
+on: push
+
+jobs:
+  create-pr-on-push:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@1.0.0
+
+    - name: Create PR
+      uses: thomaseizinger/create-pull-request@master
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        head: ${{ github.ref }}
+        base: main
+        title: "AUTO PR"
