@@ -1,18 +1,1 @@
-name: auto-pr
 
-on: 
-  push:
-    branches: ["token"]
-
-jobs:
-  create-pr-on-push:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@1.0.0
-    - name: Create pull request
-      uses: thomaseizinger/create-pull-request@master
-      with:
-        GITHUB_TOKEN: ${{ secrets.PAT_CREATE_PULL_REQUEST }}
-        head: ${{ github.ref }}
-        base: main
-        title: ${{ github.event.head_commit.message }}
